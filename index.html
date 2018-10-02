@@ -3,15 +3,15 @@
 <head>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
+
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  
+
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta charset="UTF-8"> 
+  <meta charset="UTF-8">
   <title>Breeze polling</title>
-  
+
   <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
@@ -31,10 +31,6 @@
     // Helper functions
     function signInWithRedirect() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      provider.setCustomParameters({
-        login_hint: 'snu.edu.in',
-        hd: 'snu.edu.in'
-      });
       firebase.auth().signInWithRedirect(provider);
     }
 
@@ -73,7 +69,6 @@
         return;
       }
       user = await user;
-      console.log(JSON.stringify(user));
       try {
       const database = firebase.database();
       const userSnapshot = await database.ref(`users/${user.uid}`).once('value');
@@ -91,7 +86,7 @@
       alert('Success');
       } catch (error) {
         console.log(error);
-      } 
+      }
     }
   </script>
 </head>
