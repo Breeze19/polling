@@ -65,9 +65,6 @@
     }
     // Add the vote
     async function postVote(value) {
-      if (!redirectComplete) {
-        return;
-      }
       user = await user;
       try {
       const database = firebase.database();
@@ -87,6 +84,13 @@
       } catch (error) {
         console.log(error);
       }
+    }
+
+    function postVoteWrapper(value) {
+      if (!redirectComplete) {
+        return
+      }
+      postVote(value);
     }
   </script>
 </head>
@@ -155,9 +159,9 @@
   <!--JavaScript at end of body for optimized loading-->
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script>
-    document.getElementById("btn1").addEventListener("tap", postVote('1'));
-    document.getElementById("btn2").addEventListener("tap", postVote('2'));
-    document.getElementById("btn3").addEventListener("tap", postVote('3'));
+    document.getElementById("btn1").addEventListener("click", postVoteWrapper.bind(this, '1'));
+    document.getElementById("btn2").addEventListener("click", postVoteWrapper.bind(this, '2'));
+    document.getElementById("btn3").addEventListener("click", postVoteWrapper.bind(this, '3'));
   </script>
 </body>
 </html>
